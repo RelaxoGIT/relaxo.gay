@@ -14,14 +14,23 @@ function renderHero() {
 function renderSocials() {
   var wrap = document.getElementById('s-socials');
   CONFIG.socials.forEach(function (s) {
+    var outer = document.createElement('div');
+    outer.className = 'tooltip-wrap';
+
     var a = document.createElement('a');
     a.href      = s.url;
     a.className = 'social';
     a.target    = '_blank';
     a.rel       = 'noopener noreferrer';
-    a.title     = s.title;
     a.innerHTML = '<svg viewBox="0 0 24 24">' + ICONS[s.icon] + '</svg>';
-    wrap.appendChild(a);
+
+    var tip = document.createElement('span');
+    tip.className   = 'tooltip';
+    tip.textContent = s.title;
+
+    outer.appendChild(a);
+    outer.appendChild(tip);
+    wrap.appendChild(outer);
   });
 }
 

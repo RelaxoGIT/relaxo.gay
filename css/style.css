@@ -42,8 +42,6 @@ body::before {
   width: 100px;
   height: 100px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #1a3d2b 0%, #0d2018 100%);
-  border: 1px solid rgba(0, 229, 160, 0.2);
   margin: 0 auto 24px;
   display: flex;
   align-items: center;
@@ -52,6 +50,24 @@ body::before {
   font-weight: 700;
   color: var(--accent);
   animation: bob 5s ease-in-out infinite;
+  padding: 3px;
+  background: linear-gradient(var(--bg), var(--bg)) padding-box,
+              linear-gradient(var(--ring-angle, 0deg), #00e5a0, #005c41, #00e5a0) border-box;
+  border: 3px solid transparent;
+}
+
+@property --ring-angle {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+
+@keyframes ring-spin {
+  to { --ring-angle: 360deg; }
+}
+
+.avatar {
+  animation: bob 5s ease-in-out infinite, ring-spin 3s linear infinite;
 }
 
 @keyframes bob {
@@ -254,6 +270,81 @@ body::before {
 .dc-artist { font-size: 12px; color: var(--muted); }
 .dc-game { font-size: 13px; color: var(--text); }
 .dc-spot-icon { width: 15px; height: 15px; fill: #1db954; flex-shrink: 0; }
+
+.tooltip-wrap {
+  position: relative;
+  display: inline-flex;
+}
+
+.tooltip {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  background: #1a1f1a;
+  border: 1px solid var(--border);
+  color: var(--white);
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+  padding: 5px 10px;
+  border-radius: 8px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  z-index: 10;
+}
+
+.tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: #1a1f1a;
+}
+
+.tooltip-wrap:hover .tooltip {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ── TOAST ── */
+.toast {
+  position: fixed;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%) translateY(8px);
+  background: #1a1f1a;
+  border: 1px solid var(--border);
+  color: var(--white);
+  font-size: 13px;
+  font-weight: 500;
+  padding: 8px 16px;
+  border-radius: 10px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  z-index: 100;
+}
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ── MOUSE GLOW ── */
+.mouse-glow {
+  position: fixed;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(circle, rgba(0, 229, 160, 0.07) 0%, transparent 70%);
+  transform: translate(-50%, -50%);
+  transition: left 0.08s ease, top 0.08s ease;
+}
 
 /* ── FOOTER ── */
 footer { text-align: center; padding-bottom: 48px; font-size: 12px; color: var(--muted); }

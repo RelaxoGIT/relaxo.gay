@@ -5,6 +5,8 @@ var CONFIG = {
 
   discord: '552062519171350550',
 
+  hideBadges: ['quest_completed', 'orb_profile_badge'],
+
   socials: [
     { title: 'GitHub',    url: 'https://github.com/RelaxoGIT',       icon: 'github'    },
     { title: 'Instagram', url: 'https://instagram.com/rlx0.official', icon: 'instagram' },
