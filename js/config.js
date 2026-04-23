@@ -9,9 +9,10 @@ var CONFIG = {
 
   socials: [
     { title: 'GitHub',    url: 'https://github.com/RelaxoGIT',       icon: 'github'    },
+    { title: 'Steam',    url: 'https://steamcommunity.com/id/relaxocs/',       icon: 'steam'    },
+    { title: 'Discord Server',   url: 'https://discord.awall.wtf',           icon: 'discord'   },
     { title: 'Instagram', url: 'https://instagram.com/rlx0.official', icon: 'instagram' },
     { title: 'Twitter',   url: 'https://x.com/itsrelaxo',            icon: 'twitter'   },
-    { title: 'Discord',   url: 'https://discord.awall.wtf',           icon: 'discord'   },
     { title: 'YouTube',   url: 'https://youtube.com/@itsrelaxo',      icon: 'youtube'   },
     { title: 'Twitch',    url: 'https://twitch.tv/itsrelaxo',         icon: 'twitch'    },
   ],
