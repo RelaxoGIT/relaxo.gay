@@ -50,50 +50,54 @@ document.addEventListener('mousemove', function (e) {
   });
 
   function triggerEasterEgg() {
-    // Burst aus Partikeln
-    var colors = ['#00e5a0', '#005c41', '#ffffff', '#00ffb3'];
-    for (var i = 0; i < 60; i++) {
-      spawnParticle(colors[Math.floor(Math.random() * colors.length)]);
+    // Partikel aus dem Avatar
+    var av     = document.getElementById('s-initial');
+    var rect   = av.getBoundingClientRect();
+    var cx     = rect.left + rect.width  / 2;
+    var cy     = rect.top  + rect.height / 2;
+    var colors = ['#00e5a0', '#00ffb3', '#005c41', '#ffffff'];
+
+    for (var i = 0; i < 80; i++) {
+      spawnParticle(colors[i % colors.length], cx, cy);
     }
 
-    // Kurzer Screen-Flash
-    var flash = document.createElement('div');
-    flash.style.cssText = 'position:fixed;inset:0;background:rgba(0,229,160,0.08);pointer-events:none;z-index:999;transition:opacity 0.6s ease;';
-    document.body.appendChild(flash);
-    setTimeout(function () { flash.style.opacity = '0'; }, 50);
-    setTimeout(function () { flash.remove(); }, 700);
+    // Name glitch
+    var nameEl = document.getElementById('s-name');
+    nameEl.classList.add('glitch');
+    setTimeout(function () { nameEl.classList.remove('glitch'); }, 800);
 
-    // Toast
-    var toast = document.getElementById('toast');
-    toast.textContent = '🎉 du kennst den code!';
-    toast.classList.add('show');
-    setTimeout(function () {
-      toast.classList.remove('show');
-      toast.textContent = 'Copied!';
-    }, 3000);
+    // Screen flash
+    var flash = document.createElement('div');
+    flash.style.cssText = 'position:fixed;inset:0;background:rgba(0,229,160,0.07);pointer-events:none;z-index:999;transition:opacity 0.5s ease;';
+    document.body.appendChild(flash);
+    setTimeout(function () { flash.style.opacity = '0'; }, 60);
+    setTimeout(function () { flash.remove(); }, 600);
   }
 
-  function spawnParticle(color) {
-    var p = document.createElement('div');
-    var x = Math.random() * window.innerWidth;
-    var y = Math.random() * window.innerHeight;
-    var angle = Math.random() * 360;
-    var distance = 80 + Math.random() * 120;
-    var size = 4 + Math.random() * 6;
-    var duration = 600 + Math.random() * 600;
+  function spawnParticle(color, cx, cy) {
+    var p        = document.createElement('div');
+    var angle    = Math.random() * 360;
+    var distance = 100 + Math.random() * 200;
+    var size     = 3 + Math.random() * 7;
+    var duration = 700 + Math.random() * 700;
 
-    p.style.cssText = 
+    p.style.cssText =
       'position:fixed;width:' + size + 'px;height:' + size + 'px;' +
       'border-radius:50%;background:' + color + ';' +
-      'left:' + x + 'px;top:' + y + 'px;pointer-events:none;z-index:998;' +
-      'transition:transform ' + duration + 'ms ease-out, opacity ' + duration + 'ms ease-out;';
+      'left:' + cx + 'px;top:' + cy + 'px;pointer-events:none;z-index:998;' +
+      'transform:translate(-50%,-50%);' +
+      'transition:transform ' + duration + 'ms cubic-bezier(.2,1,.3,1), opacity ' + duration + 'ms ease-out;';
 
     document.body.appendChild(p);
 
     requestAnimationFrame(function () {
-      var rad = angle * Math.PI / 180;
-      p.style.transform = 'translate(' + (Math.cos(rad) * distance) + 'px, ' + (Math.sin(rad) * distance) + 'px)';
-      p.style.opacity = '0';
+      requestAnimationFrame(function () {
+        var rad = angle * Math.PI / 180;
+        var dx  = Math.cos(rad) * distance;
+        var dy  = Math.sin(rad) * distance;
+        p.style.transform = 'translate(calc(-50% + ' + dx + 'px), calc(-50% + ' + dy + 'px))';
+        p.style.opacity   = '0';
+      });
     });
 
     setTimeout(function () { p.remove(); }, duration + 50);

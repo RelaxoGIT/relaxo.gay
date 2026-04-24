@@ -6,7 +6,14 @@ function renderHero() {
     av.textContent = CONFIG.name[0];
   }
   document.title = CONFIG.name;
-  document.getElementById('s-name').textContent   = CONFIG.name;
+  var nameEl = document.getElementById('s-name');
+  CONFIG.name.split('').forEach(function (char, i) {
+    var span = document.createElement('span');
+    span.className        = 'name-letter';
+    span.textContent      = char === ' ' ? ' ' : char;
+    span.style.animationDelay = (0.1 + i * 0.07) + 's';
+    nameEl.appendChild(span);
+  });
   document.getElementById('s-bio').textContent    = CONFIG.bio;
   document.getElementById('s-footer').textContent = CONFIG.name.toLowerCase() + '.gay';
 
