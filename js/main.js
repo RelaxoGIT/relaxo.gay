@@ -115,9 +115,8 @@ document.getElementById('s-initial').addEventListener('click', function () {
 
 // Twitch Live Badge
 (function () {
-  var twitchUser = 'itsrelaxo';
 
-  fetch('https://decapi.me/twitch/uptime/' + twitchUser)
+  fetch('https://decapi.me/twitch/uptime/' + CONFIG.twitchUser)
     .then(function (r) { return r.text(); })
     .then(function (text) {
       var isLive = !text.toLowerCase().includes('offline') && !text.toLowerCase().includes('not live');

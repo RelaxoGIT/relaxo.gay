@@ -4,6 +4,7 @@ var CONFIG = {
   avatar: 'img/pfp.png',
 
   discord: '552062519171350550',
+  twitchUser: 'itsrelaxo',
 
   hideBadges: ['quest_completed', 'orb_profile_badge'],
 
