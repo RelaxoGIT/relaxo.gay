@@ -22,7 +22,10 @@ body::before {
   content: "";
   position: fixed;
   inset: 0;
-  background: radial-gradient(ellipse 70% 35% at 50% 0%, rgba(26, 61, 43, 0.55) 0%, transparent 100%);
+  background: 
+    radial-gradient(ellipse 60% 40% at 80% 20%, rgba(0, 229, 160, 0.25) 0%, transparent 40%),
+    radial-gradient(ellipse 50% 50% at 20% 80%, rgba(0, 150, 120, 0.2) 0%, transparent 50%),
+    radial-gradient(ellipse 70% 35% at 50% 0%, rgba(26, 61, 43, 0.65) 0%, transparent 100%);
   pointer-events: none;
   z-index: 0;
 }
@@ -103,17 +106,17 @@ body::before {
 .socials { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; }
 
 .social {
-  width: 46px;
-  height: 46px;
+  padding: 8px 12px;
   border-radius: 12px;
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid var(--border);
   color: var(--muted);
   display: flex;
   align-items: center;
-  justify-content: center;
+  gap: 8px;
   text-decoration: none;
   transition: background 0.15s, border-color 0.15s, color 0.15s, transform 0.15s;
+  white-space: nowrap;
 }
 
 .social:hover {
@@ -124,6 +127,8 @@ body::before {
 }
 
 .social svg { width: 17px; height: 17px; fill: currentColor; flex-shrink: 0; }
+
+.social-title { font-size: 13px; font-weight: 500; }
 
 /* ── PROJECTS ── */
 .section-title {
