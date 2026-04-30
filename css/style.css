@@ -103,7 +103,7 @@ body::before {
 .bio { font-size: 15px; color: var(--muted); margin-bottom: 36px; }
 
 /* ── SOCIALS ── */
-.socials { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; }
+.socials { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; max-width: 450px; margin: 0 auto; }
 
 .social {
   padding: 8px 12px;
