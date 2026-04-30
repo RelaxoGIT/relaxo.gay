@@ -403,6 +403,11 @@ body::before {
 /* ── CUSTOM CURSOR ── */
 * { cursor: none !important; }
 
+@media (hover: none), (pointer: coarse) {
+  * { cursor: auto !important; }
+  .cursor { display: none !important; }
+}
+
 .cursor {
   position: fixed;
   width: 20px;
